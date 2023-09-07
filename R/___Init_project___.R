@@ -98,6 +98,8 @@ sapply(
     "remotes",
     "rlang",
     "roxygen2",
+    "sf",
+    "terra",
     "tidyverse",
     "usethis",
     "utils"
