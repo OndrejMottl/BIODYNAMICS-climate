@@ -51,3 +51,4 @@ rsconnect/
 
 # Temp files
 Data/Temp/
+Data/Processed/Paleoclimate/*.tif
