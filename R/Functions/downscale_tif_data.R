@@ -17,7 +17,7 @@ downscale_tif_data <- function(file_path,
     isTRUE(only_land) && isTRUE("sf" %in% class(shapefile_land))
   ) {
     land_spatvector <-
-      terra::vect(land_shp)
+      terra::vect(shapefile_land)
 
     data_rast_agg_crop <-
       terra::crop(
