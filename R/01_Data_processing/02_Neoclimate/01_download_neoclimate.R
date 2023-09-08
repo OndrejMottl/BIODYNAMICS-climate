@@ -41,7 +41,7 @@ library(ClimDatDownloadR)
 ClimDatDownloadR::Chelsa.Clim.download(
   # first you'll have to choose your working directory
   save.location = here::here(
-    "Data/Processed/Neoclimate"
+    "Data/Input/Neoclimate"
   ),
   # now you'll have to choose parameters.
   # since there is the possibility to download more than one data set
