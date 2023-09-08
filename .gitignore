@@ -48,3 +48,6 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 .Rproj.user
+
+# Ignore all Neoclimate TIFFs
+Data/Processed/Neoclimate/**/*.tif
