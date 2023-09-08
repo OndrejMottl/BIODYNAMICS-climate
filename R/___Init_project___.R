@@ -87,6 +87,8 @@ sapply(
   c(
     "assertthat",
     "devtools",
+    "furrr",
+    "future",
     "here",
     "httpgd",
     "janitor",

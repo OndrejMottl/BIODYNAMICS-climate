@@ -52,6 +52,8 @@ package_list <-
   c(
    "assertthat",
     "devtools",
+    "furrr",
+    "future",
     "here",
     "httpgd",
     "janitor",
