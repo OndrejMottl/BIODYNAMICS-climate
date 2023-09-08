@@ -51,6 +51,9 @@ rsconnect/
 
 # Temp files
 Data/Temp/
+R/debug.R
+
+# Ignore all climate TIF files
 Data/Processed/Paleoclimate/*.tif
-# Ignore all Neoclimate TIFFs
 Data/Processed/Neoclimate/**/*.tif
+

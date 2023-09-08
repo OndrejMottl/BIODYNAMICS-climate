@@ -3,7 +3,7 @@
 #
 #                     Abiotic data
 #
-#                  Get paleo climate
+#                crop climate data CHELSA
 #
 #
 #                       O. Mottl
@@ -35,45 +35,31 @@ shapefile_land <-
     )
   )
 
-
-#----------------------------------------------------------#
-# 2. Download selected data -----
-#----------------------------------------------------------#
-
-data_download_status <-
-  get_chelsa_trace21k_urls(
-    name = "CHELSA_TraCE21k",
-    sel_variables = c("bio", "tasmin"),
-    sel_bio = c(1, 6, 12, 15, 18, 19),
-    sel_time_var = c(20:-200),
-  ) %>%
-  download_chelsa_trace21k_data(
-    dir = here::here(
-      "Data/Temp"
-    )
+file_names <-
+  list.files(
+    here::here(
+      "Data/Processed/Neoclimate"
+    ),
+    full.names = TRUE,
+    recursive = TRUE,
+    pattern = "tif"
   )
-
-# check the status
-data_download_status %>%
-  purrr::pluck("status") %>%
-  table()
 
 
 #----------------------------------------------------------#
 # 3. Downscale data -----
 #----------------------------------------------------------#
 
-future::plan("multisession", workers = parallelly::availableCores)
+future::plan("multisession", workers = parallelly::availableCores())
 
 furrr::future_walk(
   .progress = TRUE,
-  .x = data_download_status$file_path,
+  .x = file_names,
   .f = ~ downscale_and_crop_tif_data(
     file_path = .x,
-    dir = here::here("Data/Processed/Paleoclimate"),
-    sel_factor = 5,
+    dir = here::here("Data/Processed/Neoclimate/Cropped"),
+    sel_factor = 1,
     only_land = TRUE,
-    shapefile_land = shapefile_land,
-    fun = "median"
+    shapefile_land = shapefile_land
   )
 )
