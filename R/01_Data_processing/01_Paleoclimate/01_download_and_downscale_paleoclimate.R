@@ -63,14 +63,17 @@ data_download_status %>%
 # 3. Downscale data -----
 #----------------------------------------------------------#
 
-purrr::walk(
+future::plan("multisession", workers = parallel::detectCores())
+
+furrr::future_walk(
   .progress = TRUE,
   .x = data_download_status$file_path,
   .f = ~ downscale_tif_data(
     file_path = .x,
     dir = "Data/Processed/Paleoclimate",
+    sel_factor = 5,
     only_land = TRUE,
     shapefile_land = shapefile_land,
-    cores = parallel::detectCores()
+    fun = "median"
   )
 )
