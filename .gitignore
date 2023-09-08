@@ -54,6 +54,8 @@ Data/Temp/
 R/debug.R
 
 # Ignore all climate TIF files
+Data/Input/Paleoclimate/*.tif
+Data/Input/Neoclimate/**/*.tif
 Data/Processed/Paleoclimate/*.tif
 Data/Processed/Neoclimate/**/*.tif
 

@@ -38,7 +38,7 @@ shapefile_land <-
 file_names <-
   list.files(
     here::here(
-      "Data/Processed/Neoclimate"
+      "Data/Input/Neoclimate"
     ),
     full.names = TRUE,
     recursive = TRUE,
@@ -57,7 +57,7 @@ furrr::future_walk(
   .x = file_names,
   .f = ~ downscale_and_crop_tif_data(
     file_path = .x,
-    dir = here::here("Data/Processed/Neoclimate/Cropped"),
+    dir = here::here("Data/Processed/Neoclimate"),
     sel_factor = 1,
     only_land = TRUE,
     shapefile_land = shapefile_land

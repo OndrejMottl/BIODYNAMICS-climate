@@ -49,7 +49,7 @@ data_download_status <-
   ) %>%
   download_chelsa_trace21k_data(
     dir = here::here(
-      "Data/Temp"
+      "Data/Input/Paleoclimate"
     )
   )
 
