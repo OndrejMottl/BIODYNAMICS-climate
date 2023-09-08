@@ -52,6 +52,8 @@ package_list <-
   c(
    "assertthat",
     "devtools",
+    "furrr",
+    "future",
     "here",
     "httpgd",
     "janitor",
@@ -63,6 +65,8 @@ package_list <-
     "remotes",
     "rlang",
     "roxygen2",
+    "sf",
+    "terra",
     "tidyverse",
     "usethis",
     "utils"

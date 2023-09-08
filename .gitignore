@@ -49,5 +49,8 @@ po/*~
 rsconnect/
 .Rproj.user
 
+# Temp files
+Data/Temp/
+Data/Processed/Paleoclimate/*.tif
 # Ignore all Neoclimate TIFFs
 Data/Processed/Neoclimate/**/*.tif

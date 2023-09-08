@@ -87,6 +87,8 @@ sapply(
   c(
     "assertthat",
     "devtools",
+    "furrr",
+    "future",
     "here",
     "httpgd",
     "janitor",
@@ -98,6 +100,8 @@ sapply(
     "remotes",
     "rlang",
     "roxygen2",
+    "sf",
+    "terra",
     "tidyverse",
     "usethis",
     "utils"
