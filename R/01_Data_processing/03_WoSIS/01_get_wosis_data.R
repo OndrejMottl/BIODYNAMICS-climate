@@ -117,10 +117,11 @@ DBI::dbDisconnect(wosis_db)
 
 data_soil_name_types_integer <-
   data_soil_name_types %>%
-  dplyr::mutate(VALUE = as.factor(VALUE) %>%
-    as.numeric() %>%
-    as.integer())
-
+  dplyr::mutate(
+    VALUE = as.factor(VALUE) %>%
+      as.numeric() %>%
+      as.integer()
+  )
 
 
 #----------------------------------------------------------#
@@ -136,3 +137,11 @@ wosis_raster <-
 
 wosis_raster_class <-
   terra::classify(wosis_raster, data_soil_name_types_integer)
+
+
+terra::writeRaster(
+  wosis_raster_class,
+  here::here(
+    "Data/Processed/WoSIS/wosis_raster.tif"
+  )
+)

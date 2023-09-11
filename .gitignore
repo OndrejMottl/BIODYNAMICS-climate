@@ -61,3 +61,4 @@ Data/Processed/Neoclimate/**/*.tif
 
 # Ignore large soil rasters
 Data/Input/WoSIS/HWSD2.bil
+Data/Processed/WoSIS/wosis_raster.tif
