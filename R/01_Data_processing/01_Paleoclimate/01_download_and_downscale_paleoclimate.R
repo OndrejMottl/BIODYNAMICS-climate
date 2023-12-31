@@ -35,17 +35,35 @@ shapefile_land <-
     )
   )
 
-
 #----------------------------------------------------------#
 # 2. Download selected data -----
 #----------------------------------------------------------#
 
+# In order to same time, we only download the data of each 500 years
+#   between 0 and 18,000 years before present (BP)
+sel_time_id <-
+  tibble::tibble(
+    time_id = 20:-200,
+    age = (-time_id * 100) + 2000
+  ) %>%
+  dplyr::filter(
+    age %in% seq(0, 18e3, 500)
+  ) %>%
+  purrr::chuck("time_id")
+
 data_download_status <-
   get_chelsa_trace21k_urls(
     name = "CHELSA_TraCE21k",
-    sel_variables = c("bio", "tasmin"),
-    sel_bio = c(1, 6, 12, 15, 18, 19),
-    sel_time_var = c(20:-200),
+    sel_variables = c("bio"),
+    # bio1 == Annual Mean Temperature
+    # bio4 == Temperature Seasonality
+    # bio6 == Min Temperature of Coldest Month
+    # bio12 == Annual Precipitation
+    # bio15 == Precipitation Seasonality
+    # bio18 == Precipitation of Wettest Month
+    # bio19 == Precipitation of Driest Month
+    sel_bio = c(1, 4, 6, 12, 15, 18, 19),
+    sel_time_var = sel_time_id,
   ) %>%
   download_chelsa_trace21k_data(
     dir = here::here(
@@ -57,7 +75,6 @@ data_download_status <-
 data_download_status %>%
   purrr::pluck("status") %>%
   table()
-
 
 #----------------------------------------------------------#
 # 3. Downscale data -----
@@ -71,9 +88,10 @@ furrr::future_walk(
   .f = ~ downscale_and_crop_tif_data(
     file_path = .x,
     dir = here::here("Data/Processed/Paleoclimate"),
-    sel_factor = 5,
+    sel_factor = 10,
     only_land = TRUE,
     shapefile_land = shapefile_land,
-    fun = "median"
+    fun = "median",
+    overwrite = FALSE
   )
 )
