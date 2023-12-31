@@ -7,6 +7,14 @@ downscale_and_crop_tif_data <- function(file_path,
                                         ...) {
   data_rast_raw <- terra::rast(file_path)
 
+  file_name <- paste0(dir, "/", basename(file_path))
+
+  if (
+    file.exists(file_name) && isFALSE(overwrite)
+  ) {
+    return()
+  }
+
   res <- data_rast_raw
 
   if (
@@ -38,6 +46,6 @@ downscale_and_crop_tif_data <- function(file_path,
   terra::writeRaster(
     x = res,
     overwrite = overwrite,
-    filename = paste0(dir, "/", basename(file_path))
+    filename = file_name
   )
 }
