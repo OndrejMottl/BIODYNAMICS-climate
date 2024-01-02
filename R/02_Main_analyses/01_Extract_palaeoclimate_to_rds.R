@@ -24,6 +24,7 @@ source(
   )
 )
 
+rewrite_files <- FALSE
 
 #----------------------------------------------------------#
 # 1. Load data -----
@@ -73,13 +74,8 @@ file_names %>%
   furrr::future_walk(
     .progress = TRUE,
     .f = ~ {
-      data_extract <-
-        extract_values_from_tif_file(.x)
-
       file_name <-
-        data_extract$var_name %>%
-        unique() %>%
-        basename()
+        basename(.x)
 
       sel_var <-
         stringr::str_extract(
@@ -108,7 +104,29 @@ file_names %>%
           )
       }
 
-      data_extract %>%
+      # detect if file already exists
+      latest_file_name <-
+        RUtilpol::get_latest_file_name(
+          file_name = paste0(
+            "CHELSA_TraCE21k_",
+            sel_var,
+            "_",
+            time_id
+          ),
+          dir = here::here(
+            "Data/Processed/Paleoclimate/Extracted_values",
+            sel_var
+          )
+        )
+
+      if (
+        isFALSE(is.na(latest_file_name)) &&
+          isFALSE(rewrite_files)
+      ) {
+        return(invisible())
+      }
+
+      extract_values_from_tif_file(.x) %>%
         dplyr::mutate(
           var_name = sel_var,
           time_id = time_id
