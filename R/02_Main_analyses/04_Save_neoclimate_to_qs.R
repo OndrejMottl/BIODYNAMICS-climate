@@ -3,7 +3,7 @@
 #
 #                     Abiotic data
 #
-#              Merge Palaeoclimate data to QS
+#              Save Neoclimate data to QS
 #
 #
 #                       O. Mottl
