@@ -57,6 +57,7 @@ purrr::walk(
     file_path = .x,
     dir = here::here("Data/Processed/Neoclimate"),
     sel_factor = 5,
+    fun = "median",
     only_land = TRUE,
     overwrite = FALSE,
     shapefile_land = shapefile_land
