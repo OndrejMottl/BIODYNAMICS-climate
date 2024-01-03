@@ -50,9 +50,7 @@ file_names <-
 # 3. Downscale data -----
 #----------------------------------------------------------#
 
-future::plan("multisession", workers = parallelly::availableCores())
-
-furrr::future_walk(
+purrr::walk(
   .progress = TRUE,
   .x = file_names,
   .f = ~ downscale_and_crop_tif_data(

@@ -48,7 +48,7 @@ ClimDatDownloadR::Chelsa.Clim.download(
   # the parameters must be a string-vector input.
   # Single parameters, however, can be just put in as a string.
   # the valid parameter inputs can be found in the help (linked s.o.)
-  parameter = c("prec", "temp", "tmax", "tmin", "bio"),
+  parameter = "bio",
   # Now, since you chose "temp" and "bio" as input parameters,
   # you can specify the months and bioclim-variables to download.
   # If you want all of them, just leave the default values.
