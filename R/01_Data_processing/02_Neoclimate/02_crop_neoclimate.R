@@ -50,16 +50,15 @@ file_names <-
 # 3. Downscale data -----
 #----------------------------------------------------------#
 
-future::plan("multisession", workers = parallelly::availableCores())
-
-furrr::future_walk(
+purrr::walk(
   .progress = TRUE,
   .x = file_names,
   .f = ~ downscale_and_crop_tif_data(
     file_path = .x,
     dir = here::here("Data/Processed/Neoclimate"),
-    sel_factor = 1,
+    sel_factor = 5,
     only_land = TRUE,
+    overwrite = FALSE,
     shapefile_land = shapefile_land
   )
 )
