@@ -56,7 +56,7 @@ ClimDatDownloadR::Chelsa.Clim.download(
   month.var = c(1:12),
   # For Chelsa a newer Version of their climatologies was published in 2019.
   # They still got their old version still hosted on their website.
-  bio.var = c(1, 6, 12, 15, 18, 19),
+  bio.var = c(1, 4, 6, 12, 15, 18, 19),
   version.var = "2.1",
   # Now you can choose whether you want the data set clipped
   clipping = FALSE,

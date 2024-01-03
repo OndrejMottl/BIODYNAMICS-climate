@@ -60,7 +60,7 @@ furrr::future_walk(
     dir = here::here("Data/Processed/Neoclimate"),
     sel_factor = 5,
     only_land = TRUE,
-    overwrite = TRUE,
+    overwrite = FALSE,
     shapefile_land = shapefile_land
   )
 )
