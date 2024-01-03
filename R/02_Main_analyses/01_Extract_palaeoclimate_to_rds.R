@@ -73,76 +73,13 @@ future::plan("multisession", workers = parallelly::availableCores)
 file_names %>%
   furrr::future_walk(
     .progress = TRUE,
-    .f = ~ {
-      file_name <-
-        basename(.x)
-
-      sel_var <-
-        stringr::str_extract(
-          file_name,
-          "(?<=CHELSA_TraCE21k_)(.*?)(?=_[-0-9])"
-        )
-
-      if (
-        sel_var == "tasmin"
-      ) {
-        sel_var <-
-          stringr::str_extract(
-            file_name,
-            "(?<=CHELSA_TraCE21k_)(.*?)(?=_[-0-9])"
-          )
-
-        time_id <-
-          stringr::str_extract(
-            file_name, "(?<=_)(-?[0-9]+)(?=_V1.0)"
-          )
-      } else {
-        time_id <-
-          stringr::str_extract(
-            file_name,
-            paste0("(?<=_", sel_var, "_)(-?[0-9]+)(?=_V1.0)")
-          )
-      }
-
-      # detect if file already exists
-      latest_file_name <-
-        RUtilpol::get_latest_file_name(
-          file_name = paste0(
-            "CHELSA_TraCE21k_",
-            sel_var,
-            "_",
-            time_id
-          ),
-          dir = here::here(
-            "Data/Processed/Paleoclimate/Extracted_values",
-            sel_var
-          )
-        )
-
-      if (
-        isFALSE(is.na(latest_file_name)) &&
-          isFALSE(rewrite_files)
-      ) {
-        return(invisible())
-      }
-
-      extract_values_from_tif_file(.x) %>%
-        dplyr::mutate(
-          var_name = sel_var,
-          time_id = time_id
-        ) %>%
-        RUtilpol::save_latest_file(
-          object_to_save = .,
-          file_name = paste0(
-            "CHELSA_TraCE21k_",
-            sel_var,
-            "_",
-            time_id
-          ),
-          dir = here::here(
-            "Data/Processed/Paleoclimate/Extracted_values",
-            sel_var
-          )
-        )
-    }
+    .f = ~ save_tif_as_rds(
+      file_path = .x,
+      save_dir = here::here(
+        "Data/Processed/Paleoclimate/Extracted_values"
+      ),
+      model_name = "CHELSA_TraCE21k",
+      save_into_subfolders = TRUE,
+      rewrite_files = rewrite_files
+    )
   )
