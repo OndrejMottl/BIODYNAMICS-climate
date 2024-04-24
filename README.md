@@ -1,4 +1,4 @@
-# # VegVault: Abiotic data
+# VegVault: Abiotic data
 
 This is part of the [BIODYNAMICS project](https://ondrejmottl.github.io/projects/BIODYNAMICS/).
 
