@@ -24,6 +24,8 @@ source(
   )
 )
 
+rewrite_files <- FALSE
+
 #----------------------------------------------------------#
 # 2. Load country shapefile -----
 #----------------------------------------------------------#
@@ -42,12 +44,12 @@ shapefile_land <-
 
 downscale_and_crop_tif_data(
   file_path = here::here(
-    "Data/Processed/WoSIS/wosis_raster.tif"
+    "Data/Processed/WoSIS/resampled/wosis_raster.tif"
   ),
   dir = here::here("Data/Processed/WoSIS/downscaled"),
-  sel_factor = 5,
-  fun = "median",
-  only_land = TRUE,
-  overwrite = FALSE,
+  sel_factor = 25,
+  fun = "modal",
+  only_land = FALSE,
+  overwrite = rewrite_files,
   shapefile_land = shapefile_land
 )
