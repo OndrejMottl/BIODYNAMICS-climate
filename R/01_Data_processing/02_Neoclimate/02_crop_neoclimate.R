@@ -24,6 +24,8 @@ source(
   )
 )
 
+rewrite_files <- FALSE
+
 #----------------------------------------------------------#
 # 2. Load country shapefile -----
 #----------------------------------------------------------#
@@ -56,10 +58,10 @@ purrr::walk(
   .f = ~ downscale_and_crop_tif_data(
     file_path = .x,
     dir = here::here("Data/Processed/Neoclimate"),
-    sel_factor = 5,
+    sel_factor = 25,
     fun = "median",
-    only_land = TRUE,
-    overwrite = FALSE,
+    only_land = FALSE,
+    overwrite = rewrite_files,
     shapefile_land = shapefile_land
   )
 )

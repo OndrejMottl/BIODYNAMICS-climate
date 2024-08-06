@@ -24,6 +24,8 @@ source(
   )
 )
 
+rewrite_files <- FALSE
+
 #----------------------------------------------------------#
 # 2. Load country shapefile -----
 #----------------------------------------------------------#
@@ -80,7 +82,7 @@ data_download_status %>%
 # 3. Downscale data -----
 #----------------------------------------------------------#
 
-future::plan("multisession", workers = parallelly::availableCores)
+future::plan("multisession", workers = parallelly::availableCores() - 1)
 
 furrr::future_walk(
   .progress = TRUE,
@@ -88,10 +90,10 @@ furrr::future_walk(
   .f = ~ downscale_and_crop_tif_data(
     file_path = .x,
     dir = here::here("Data/Processed/Paleoclimate"),
-    sel_factor = 10,
-    only_land = TRUE,
+    sel_factor = 25,
+    only_land = FALSE,
     shapefile_land = shapefile_land,
     fun = "median",
-    overwrite = FALSE
+    overwrite = rewrite_files
   )
 )
