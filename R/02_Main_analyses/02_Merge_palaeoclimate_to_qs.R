@@ -77,7 +77,7 @@ purrr::walk(
 
     save_in_batches(
       data_source = data_sel_var,
-      n_batches = 5,
+      n_batches = 3,
       file_name = sel_var,
       dir = here::here(
         "Outputs/Data/Palaoclimate"
